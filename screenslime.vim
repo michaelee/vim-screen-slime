@@ -1,4 +1,5 @@
 " adapted from http://technotales.wordpress.com/2007/10/03/like-slime-for-vim/
+" put in ~/.vim/plugin/
 
 function Send_to_Screen(text)
   if !exists("g:screenrepl_sessionname") || !exists("g:screenrepl_windowname")
@@ -13,19 +14,17 @@ function Screen_Session_Names(A,L,P)
 endfunction
 
 function Screen_Vars()
-  if !exists("g:screen_sessionname") || !exists("g:screen_windowname")
-    let g:screen_sessionname = ""
-    let g:screen_windowname = "0"
+  if !exists("g:screenrepl_sessionname") || !exists("g:screenrepl_windowname")
+    let g:screenrepl_sessionname = ""
+    let g:screenrepl_windowname = "0"
   end
 
-  let g:screen_sessionname = input("session name: ", "", "custom,Screen_Session_Names")
-  let g:screen_windowname = input("window name: ", g:screen_windowname)
+  let g:screenrepl_sessionname = input("session name: ", "", "custom,Screen_Session_Names")
+  let g:screenrepl_windowname = input("window name: ", g:screenrepl_windowname)
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vmap <Leader>cc "ry :call Send_to_Screen(@r)<CR>
+nmap <Leader>cc vip<Leader>cc
 
-vmap <C-c><C-c> "ry :call Send_to_Screen(@r)<CR>
-nmap <C-c><C-c> vip<C-c><C-c>
-
-nmap <C-c>v :call Screen_Vars()<CR>
-
+" nmap <C-c>v :call Screen_Vars()<CR>
